@@ -6,17 +6,19 @@ close_list = ["]", "}", ")"]
 
 class Calculator:
 
+    # very simple implmentation of a stack
+    stack = []
+
     def compute(self, input):
-        left_bound = 0
         for index in range(len(input)):
             if input[index] in open_list:
-                left_bound = index
+                self.stack.append(index)
             elif input[index] in close_list:
-                solution = self.evaluate(input[left_bound + 1:index])
-                if left_bound == 0:
+                solution = self._evaluate(input[self.stack.pop()+1:index])
+                if not self.stack:
                     return solution
 
-    def evaluate(self, expression):
+    def _evaluate(self, expression):
 
         # split the expression to three args
         # ex: (add 2+3) -> add, 2, 3
@@ -24,16 +26,16 @@ class Calculator:
 
         match args[0]:
             case 'add':
-                answer = self.add(args[1], args[2])
+                answer = self._add(args[1], args[2])
             case 'multiply':
-                answer = self.multiply(args[1], args[2])
+                answer = self._multiply(args[1], args[2])
 
         return answer
 
-    def add(self, x, y):
+    def _add(self, x, y):
         return int(x)+int(y)
 
-    def multiply(self, x, y):
+    def _multiply(self, x, y):
         return int(x)*int(y)
 
 

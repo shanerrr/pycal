@@ -29,7 +29,7 @@ class Calculator:
     def _evaluate(self, expression):
 
         # split the expression to three args
-        # ex: (add 2+3) -> add, 2, 3
+        # ex: (add 2+3) -> [add, 2, 3]
         args = expression.split()
 
         match args[0]:

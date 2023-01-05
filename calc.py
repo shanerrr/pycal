@@ -6,17 +6,22 @@ close_list = ["]", "}", ")"]
 
 class Calculator:
 
-    # very simple implmentation of a stack
-    stack = []
-
     def compute(self, input):
-        for index in range(len(input)):
-            if input[index] in open_list:
-                self.stack.append(index)
-            elif input[index] in close_list:
-                solution = self._evaluate(input[self.stack.pop()+1:index])
-                if not self.stack:
-                    return solution
+
+        rb = input.find(')')
+        lb = input[:rb].rfind('(')
+
+        solution = self._evaluate(
+            input[lb + 1:rb])
+
+        return solution
+        # for index in range(len(input)):
+        #     if input[index] in open_list:
+        #         self.stack.append(index)
+        #     elif input[index] in close_list:
+        #         solution = self._evaluate(input[self.stack.pop()+1:index])
+        #         if not self.stack:
+        #             return solution
 
     def _evaluate(self, expression):
 
